@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-map {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem ;
+}
+
+.card {
+    padding: 1rem;
+    margin: 2rem 0;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.card ul {
+    display: flex;
+    li {
+        list-style: none;
+    }
+}
