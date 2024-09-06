@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MapController!{% endblock %}
+
+{% block body %}
+
+    <h1>Results</h1>
+
+    {% dump(results) %}
+
+    {% for result in results %}
+        <div class="card">
+            <p><b>{{ result['name'] }}</b></p>
+            <i>{{ result['lat'] }}, {{ result['lon'] }}</i>
+            <ul>
+                <li>{{ result['address']['city'] }} - </li>
+                <li>{{ result['address']['road'] }} - </li>
+                <li>{{ result['address']['postcode'] }}</li>
+            </ul>
+            <form action="{{ path('poi_add') }}" method="post">
+                <input type="hidden" name="nom" value="{{ result['name'] }}">
+                <input type="hidden" name="latitude" value="{{ result['lat'] }}">
+                <input type="hidden" name="longitude" value="{{ result['lon'] }}">
+                <input type="hidden" name="ville" value="{{ result['address']['city'] }}">
+                <input type="hidden" name="adresse" value="{{ result['address']['road'] }}">
+                <input type="hidden" name="cp" value="{{ result['address']['postcode'] }}">
+                <button type="submit">
+                    <b>Ajouter</b>
+                </button>
+            </form>
+        </div>
+        
+        
+    {% endfor %}
+   
+
+{% endblock %}
