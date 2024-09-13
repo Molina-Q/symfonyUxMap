@@ -10,28 +10,25 @@
 
     {% for result in results %}
         <div class="card">
-            <p><b>{{ result['name'] }}</b></p>
-            <i>{{ result['lat'] }}, {{ result['lon'] }}</i>
+            <p><b>{{ result['name'] | default('No name') }}</b></p>
+            <i>{{ result['lat'] | default('No latitude') }}, {{ result['lon'] | default('No longitude') }}</i>
             <ul>
-                <li>{{ result['address']['city'] }} - </li>
-                <li>{{ result['address']['road'] }} - </li>
-                <li>{{ result['address']['postcode'] }}</li>
+                <li>{{ result['address']['city'] | default('No city') }} - </li>
+                <li>{{ result['address']['road'] | default('No road') }} - </li>
+                <li>{{ result['address']['postcode'] | default('No postcode') }}</li>
             </ul>
             <form action="{{ path('poi_add') }}" method="post">
-                <input type="hidden" name="nom" value="{{ result['name'] }}">
-                <input type="hidden" name="latitude" value="{{ result['lat'] }}">
-                <input type="hidden" name="longitude" value="{{ result['lon'] }}">
-                <input type="hidden" name="ville" value="{{ result['address']['city'] }}">
-                <input type="hidden" name="adresse" value="{{ result['address']['road'] }}">
-                <input type="hidden" name="cp" value="{{ result['address']['postcode'] }}">
+                <input type="hidden" name="nom" value="{{ result['name'] | default('No name') }}">
+                <input type="hidden" name="latitude" value="{{ result['lat'] | default('No latitude') }}">
+                <input type="hidden" name="longitude" value="{{ result['lon'] | default('No longitude') }}">
+                <input type="hidden" name="ville" value="{{ result['address']['city'] | default('No city') }}">
+                <input type="hidden" name="adresse" value="{{ result['address']['road'] | default('No road') }}">
+                <input type="hidden" name="cp" value="{{ result['address']['postcode'] | default('No postcode') }}">
                 <button type="submit">
                     <b>Ajouter</b>
                 </button>
             </form>
         </div>
-        
-        
     {% endfor %}
-   
 
 {% endblock %}
