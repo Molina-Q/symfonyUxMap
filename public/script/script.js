@@ -85,12 +85,12 @@ function hydrateTrajectories(poiData) {
 
         poiData.forEach((poi) => {
             const startOption = document.createElement("option");
-            startOption.innerText = poi.nom;
+            startOption.innerText = `${poi.ville} - ${poi.nom}`;
             startOption.value = poi.latitude + ", " + poi.longitude;
             trajStart.appendChild(startOption);
 
             const endOption = document.createElement("option");
-            endOption.innerText = poi.nom;
+            endOption.innerText = `${poi.ville} - ${poi.nom}`;
             endOption.value = poi.latitude + ", " + poi.longitude;
             trajEnd.appendChild(endOption);
         });
