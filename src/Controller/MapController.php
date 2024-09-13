@@ -43,11 +43,24 @@ class MapController extends AbstractController
             );
         }
 
-        return $this->render('map/index.html.twig', [
-            'map' => $map,
-            'poi' => $POI,
-        ]);
+        return $this->render('map/index.html.twig');
     }
+
+    #[Route('/map/js', name: 'app_map_js')]
+    public function index_js(): Response
+    {
+        $map = (new Map())
+            ->center(new Point(48.8566, 2.3522))
+            ->Zoom(6);
+
+        $data = $this->httpClient->request('GET', 'http://localhost:3000/api/poi');
+        $decodedData = json_decode($data->getContent(), true);
+        $POIS = $decodedData["data"];
+
+        return $this->json($POIS);
+    }
+
+
 
     #[Route('/search', name: 'app_search_index', methods: ['GET'])]
     public function searchPage(): Response
@@ -110,6 +123,6 @@ class MapController extends AbstractController
 
         $response = json_decode($data->getContent(), true);
 
-        return $this->redirectToRoute('index_map');
+        return $this->redirectToRoute('app_map');
     }
 }
